@@ -24,10 +24,14 @@ $('#play').click(function () {
 });
 var typed = new Typed("#typed", {
     stringsElement: '#typed-strings',
-    typeSpeed: 5,
-    backSpeed: 5,
-    loop: true
+    typeSpeed: 30,      // ⬅ slower & elegant
+    backSpeed: 15,
+    startDelay: 1000,
+    backDelay: 3000,
+    loop: false,
+    smartBackspace: true
 });
+
 var retina = window.devicePixelRatio,
 
     // Math shorthands
