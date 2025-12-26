@@ -28,7 +28,7 @@ var typed = new Typed("#typed", {
     backSpeed: 15,
     startDelay: 1000,
     backDelay: 3000,
-    loop: false,
+    loop: true,
     smartBackspace: true
 });
 
