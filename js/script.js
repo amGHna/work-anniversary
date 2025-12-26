@@ -26,8 +26,6 @@ var typed = new Typed("#typed", {
     stringsElement: '#typed-strings',
     typeSpeed: 30,      // ⬅ slower & elegant
     backSpeed: 15,
-    startDelay: 1000,
-    backDelay: 3000,
     loop: true,
     smartBackspace: true
 });
