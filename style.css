@@ -140,9 +140,11 @@ img {
 }
 
 .birthday-banner {
-    max-width: 200px;   /* ⬅ controls size */
+    max-width: 320px;   /* change this number if you want */
     width: 100%;
-    margin: 0 auto 20px;
+    height: auto;
     display: block;
+    margin: 0 auto;
 }
+
 
