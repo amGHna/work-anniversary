@@ -140,7 +140,7 @@ img {
 }
 
 .birthday-banner {
-    max-width: 320px;   /* change this number if you want */
+    max-width: 460px;   /* change this number if you want */
     width: 100%;
     height: auto;
     display: block;
