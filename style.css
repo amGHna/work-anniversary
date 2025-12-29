@@ -124,9 +124,9 @@ img {
 .cake {
     position: absolute;
     left: 50%;
-    top: 520px;        /* adjust this to move cake up/down */
+    top: 580px;        /* adjust this to move cake up/down */
     transform: translateX(-50%);
-    width: 220px;      /* optional: control cake size */
+    width: 250px;      /* optional: control cake size */
 }
 
 
