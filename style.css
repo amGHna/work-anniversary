@@ -1,7 +1,7 @@
 /* customizable snowflake styling */
 
 .loader button {
-    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+    font-family: 'Dubai', sans-serif;
     position: fixed;
     left: 50%;
     top: 50%;
@@ -130,7 +130,7 @@ img {
 
 
 .birthday-title {
-    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+    font-family: 'Dubai', sans-serif;
     font-size: 40px;
     color: #FFEE8C;
     letter-spacing: 2px;
