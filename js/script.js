@@ -6,10 +6,10 @@ var url_string = window.location.href; //window.location.href
 var url = new URL(url_string);
 var c = url.searchParams.get("name");
 console.log(c);
-if (c != null) {
-    document.getElementById("name").innerHTML = c;
-    document.getElementById("nae").innerHTML = c;
-}
+//if (c != null) 
+   // document.getElementById("name").innerHTML = c;
+   // document.getElementById("nae").innerHTML = c;
+
 $(".main").fadeOut(1);
 $('#play').click(function () {
     $(".loader").fadeOut(1500);
@@ -21,6 +21,24 @@ $('#play').click(function () {
     var audio = $('.song')[0];
     audio.play();
 
+});
+
+// Typed NAME effect
+var typedName;
+
+$('#play').click(function () {
+    if (c != null) {
+        document.getElementById("typed-strings").innerHTML =
+            "<h1>" + c + "</h1>";
+    }
+
+    typedName = new Typed("#typed-name", {
+        stringsElement: "#typed-strings",
+        typeSpeed: 80,
+        backSpeed: 0,
+        showCursor: false,
+        loop: false
+    });
 });
 
 var retina = window.devicePixelRatio,
