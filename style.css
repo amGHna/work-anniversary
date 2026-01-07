@@ -121,13 +121,12 @@ img {
 
 }
 
-.cake {
+/* .cake {
     position: absolute;
     left: 50%;
-    top: 360px;        /* adjust this to move cake up/down */
+    top: 360px;        
     transform: translateX(-50%);
-    width: 250px;      /* optional: control cake size */
-}
+    width: 250px;  } */
 
 
 .birthday-title {
