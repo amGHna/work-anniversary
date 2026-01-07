@@ -148,7 +148,7 @@ img {
 
 
 .main .container {
-    transform: translateY(-100px); /* adjust -20 / -30 / -50 */
+    transform: translateY(-10px); /* adjust -20 / -30 / -50 */
 }
 
 
