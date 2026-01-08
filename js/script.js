@@ -34,7 +34,7 @@ $('#play').click(function () {
 
     typedName = new Typed("#typed-name", {
         stringsElement: "#typed-strings",
-        typeSpeed: 30,
+        typeSpeed: 140,
         backSpeed: 0,
         showCursor: false,
         loop: false
