@@ -11,7 +11,7 @@ console.log(c);
    // document.getElementById("nae").innerHTML = c;
 
 $(".main").fadeOut(1);
-$('#play').click(function () {
+$(window).load(function () {
     $(".loader").fadeOut(1500);
     $(".main").fadeIn("slow");
     $(".birthday-title").addClass("pulse-active");
