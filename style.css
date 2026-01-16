@@ -132,6 +132,8 @@ img {
     letter-spacing: 2px;
     font-weight: 600;
     text-transform: uppercase;
+    position: relative; /* Add this */
+    z-index: 10;        /* Add this */
 }
 
 .birthday-banner {
