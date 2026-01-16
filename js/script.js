@@ -18,8 +18,6 @@ $('#play').click(function () {
     $('.balloon-border').animate({
         top: -500
     }, 8000);
-    var audio = $('.song')[0];
-    audio.play();
 
 });
 
