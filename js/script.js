@@ -19,7 +19,7 @@ $(window).load(function () {
     sf.destroy();
     $('.balloon-border').animate({
         top: -1500
-    }, 50000);
+    }, 35000);
 
 });
 
