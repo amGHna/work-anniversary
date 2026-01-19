@@ -12,7 +12,7 @@ console.log(c);
 
 $(".main").fadeOut(1);
 $(window).load(function () {
-    $(".loader").fadeOut(1500);
+    $(".loader").fadeOut(1700);
     $(".main").fadeIn("slow");
     $(".birthday-title").addClass("pulse-active");
     $(".birthday-message").addClass("pulse-active");
