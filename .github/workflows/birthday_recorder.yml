@@ -1,0 +1,13 @@
+name: Record Birthday GIF
+on:
+  repository_dispatch:
+    types: [birthday_trigger] # This is the "Signal" name
+
+jobs:
+  record:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Receive Signal
+        run: |
+          echo "Power Automate sent a name: ${{ github.event.client_payload.name }}"
+          # Later, our Puppeteer recording script will go here
