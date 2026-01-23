@@ -7,6 +7,34 @@ if (name) {
     document.getElementById('birthday-title').innerText = "Happy Birthday " + name;
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+
+    // 1. Get the name from the URL (e.g., ?name=Sarah)
+
+    const urlParams = new URLSearchParams(window.location.search);
+
+    let personName = urlParams.get('name');
+
+
+
+    // 2. If a name exists in the URL, update your animation text
+
+    if (personName) {
+
+        // Replace 'name-display' with the actual ID of your text element
+
+        const nameElement = document.getElementById('name-display');
+
+        if (nameElement) {
+
+            nameElement.innerText = decodeURIComponent(personName);
+
+        }
+
+    }
+
+});
+
 var sf = new Snowflakes({
     color: "#f6f6f5ff",
     minSize: 20
