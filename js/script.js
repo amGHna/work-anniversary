@@ -1,38 +1,12 @@
-// Add this at the very top of your script.js
-const urlParams = new URLSearchParams(window.location.search);
-const name = urlParams.get('name');
-
-if (name) {
-    // Replace 'birthday-title' with the actual ID of your text element
-    document.getElementById('birthday-title').innerText = "Happy Birthday " + name;
-}
-
 document.addEventListener('DOMContentLoaded', () => {
-
-    // 1. Get the name from the URL (e.g., ?name=Sarah)
-
     const urlParams = new URLSearchParams(window.location.search);
-
-    let personName = urlParams.get('name');
-
-
-
-    // 2. If a name exists in the URL, update your animation text
-
-    if (personName) {
-
-        // Replace 'name-display' with the actual ID of your text element
-
-        const nameElement = document.getElementById('name-display');
-
-        if (nameElement) {
-
-            nameElement.innerText = decodeURIComponent(personName);
-
+    const name = urlParams.get('name');
+    if (name) {
+        const titleElement = document.getElementById('birthday-title');
+        if (titleElement) {
+            titleElement.innerText = "Happy Birthday " + decodeURIComponent(name);
         }
-
     }
-
 });
 
 var sf = new Snowflakes({
