@@ -1,3 +1,12 @@
+// Add this at the very top of your script.js
+const urlParams = new URLSearchParams(window.location.search);
+const name = urlParams.get('name');
+
+if (name) {
+    // Replace 'birthday-title' with the actual ID of your text element
+    document.getElementById('birthday-title').innerText = "Happy Birthday " + name;
+}
+
 var sf = new Snowflakes({
     color: "#f6f6f5ff",
     minSize: 20
