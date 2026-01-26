@@ -20,7 +20,7 @@ const { PuppeteerScreenRecorder } = require('puppeteer-screen-recorder');
 
   // Records 10 seconds of your animation
   await recorder.start('video.mp4');
-  await new Promise(resolve => setTimeout(resolve, 10000)); 
+  await new Promise(resolve => setTimeout(resolve, 5000)); 
   await recorder.stop();
 
   await browser.close();
