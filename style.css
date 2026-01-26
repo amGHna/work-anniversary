@@ -24,6 +24,12 @@ img {
     top: 100%;
     opacity: 0.5;
     z-index: 99999999;
+    animation: slideUpBalloons 4s ease-out forwards;
+}
+
+@keyframes slideUpBalloons {
+    0% { top: 100%; }
+    100% { top: -10%; } /* Flies all the way past the top edge */
 }
 
 .area {
@@ -73,23 +79,21 @@ img {
 
 }
 
-/* .cake {
-    position: absolute;
-    left: 50%;
-    top: 360px;        
-    transform: translateX(-50%);
-    width: 250px;  } */
-
 
 .birthday-title {
     font-family: 'Dubai', sans-serif;
-    font-size: 65px;
+    font-size: clamp(30px, 10vw, 60px);
     color: #FFEE8C;
     letter-spacing: 2px;
     font-weight: 600;
     text-transform: uppercase;
-    position: relative; /* Add this */
-    z-index: 10;        /* Add this */
+    position: relative; 
+    z-index: 10;     
+    text-align: center;
+    width: 95%;      /* Prevents touching the screen edges */
+    margin: 0 auto;
+    line-height: 1.2;
+    animation: breathe-glow 2s ease-in-out infinite;
 }
 
 .birthday-banner {
