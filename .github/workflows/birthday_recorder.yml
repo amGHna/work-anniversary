@@ -17,9 +17,10 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install Puppeteer and FFmpeg
+      - name: Install Puppeteer, Chrome, and FFmpeg
         run: |
           npm install puppeteer puppeteer-screen-recorder
+          npx puppeteer browsers install chrome
           sudo apt-get update
           sudo apt-get install -y ffmpeg
 
