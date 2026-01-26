@@ -29,7 +29,7 @@ img {
 
 @keyframes slideUpBalloons {
     0% { top: 100%; }
-    100% { top: -10%; } /* Flies all the way past the top edge */
+    100% { top: -120%; } /* Flies all the way past the top edge */
 }
 
 .area {
