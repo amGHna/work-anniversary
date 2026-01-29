@@ -4,34 +4,25 @@ document.addEventListener('DOMContentLoaded', () => {
     if (name) {
         const titleElement = document.getElementById('birthday-title');
         if (titleElement) {
-            titleElement.innerText = "Happy Birthday " + decodeURIComponent(name);
+            // Updated for Anniversary and White Text
+            titleElement.innerHTML = `Happy Work Anniversary <br> <span style="font-size: 1.2em;">${decodeURIComponent(name)}</span>`;
         }
     }
 });
 
+// Using white snowflakes for the loader phase
 var sf = new Snowflakes({
-    color: "#f6f6f5ff",
+    color: "#ffffff",
     minSize: 20
 });
-var url_string = window.location.href; //window.location.href
-var url = new URL(url_string);
-var c = url.searchParams.get("name");
-console.log(c);
-//if (c != null) 
-   // document.getElementById("name").innerHTML = c;
-   // document.getElementById("nae").innerHTML = c;
 
 $(".main").fadeOut(1);
 $(window).load(function () {
     $(".loader").fadeOut(1000);
     $(".main").fadeIn("slow");
     $(".birthday-title").addClass("pulse-active");
-    $(".birthday-message").addClass("pulse-active");
     sf.destroy();
-    $('.balloon-border').animate({
-        top: -1500
-    }, 25000);
-
+    // Balloon animation logic removed to prevent errors
 });
 
 var retina = window.devicePixelRatio,
@@ -53,9 +44,6 @@ var retina = window.devicePixelRatio,
 
 // Local WindowAnimationTiming interface polyfill
 (function (w) {
-    /**
-     * Fallback implementation.
-     */
     var prev = _now();
 
     function fallback(fn) {
@@ -66,9 +54,6 @@ var retina = window.devicePixelRatio,
         return req;
     }
 
-    /**
-     * Cancel.
-     */
     var cancel = w.cancelAnimationFrame ||
         w.webkitCancelAnimationFrame ||
         w.clearTimeout;
@@ -92,11 +77,12 @@ document.addEventListener("DOMContentLoaded", function () {
         confettiPaperCount = 15,
         DEG_TO_RAD = PI / 180,
         RAD_TO_DEG = 180 / PI,
+        // SILVER AND WHITE PALETTE FOR ANNIVERSARY
         colors = [
-            ["#FFD700", "#B8860B"], // Gold and Dark Gold
-            ["#FFEE8C", "#D4AF37"], // Soft Yellow (matches your text) and Metallic Gold
-            ["#FAFAD2", "#DAA520"], // Light Goldenrod and Goldenrod
-            ["#FFDF00", "#996515"]  // Bright Yellow and Deep Bronze
+            ["#C0C0C0", "#808080"], // Silver and Grey
+            ["#DCDCDC", "#A9A9A9"], // Gainsboro and Dark Grey
+            ["#FFFFFF", "#E0E0E0"], // White and Light Grey
+            ["#BDBDBD", "#757575"]  // Silver Variations
         ];
 
     function Vector2(_x, _y) {
@@ -149,7 +135,7 @@ document.addEventListener("DOMContentLoaded", function () {
     Vector2.SqrDistance = function (_vec0, _vec1) {
         var x = _vec0.x - _vec1.x;
         var y = _vec0.y - _vec1.y;
-        return (x * x + y * y + z * z);
+        return (x * x + y * y);
     }
     Vector2.Scale = function (_vec0, _vec1) {
         return new Vector2(_vec0.x * _vec1.x, _vec0.y * _vec1.y);
@@ -165,7 +151,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return new Vector2(vecNorm.x * _len, vecNorm.y * _len);
     }
     Vector2.Sub = function (_vec0, _vec1) {
-        return new Vector2(_vec0.x - _vec1.x, _vec0.y - _vec1.y, _vec0.z - _vec1.z);
+        return new Vector2(_vec0.x - _vec1.x, _vec0.y - _vec1.y);
     }
 
     function EulerMass(_x, _y, _mass, _drag) {
