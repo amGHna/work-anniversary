@@ -12,8 +12,8 @@ const { PuppeteerScreenRecorder } = require('puppeteer-screen-recorder');
   await page.setViewport({ width: 600, height: 400 });
 
   const name = process.env.EMPLOYEE_NAME || 'Team Member';
-  // Points to your specific URL
-  const url = `https://oh3alarab-jpg.github.io/happy-birthday/?name=${encodeURIComponent(name)}`;
+  // Points to your NEW account URL
+  const url = `https://amGHna.github.io/happy-birthday/?name=${encodeURIComponent(name)}`;
   
   const recorder = new PuppeteerScreenRecorder(page);
   await page.goto(url, { waitUntil: 'networkidle0' });
