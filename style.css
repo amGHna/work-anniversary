@@ -59,6 +59,13 @@ img {
     animation: breathe-glow 4s ease-in-out infinite;
 }
 
+.company-logo {
+    max-width: 200px; 
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
 .main {
     display: flex;
     flex-direction: column;
