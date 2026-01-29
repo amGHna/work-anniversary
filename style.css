@@ -1,3 +1,4 @@
+/* 1. Loader & Background */
 .loader {
     position: fixed;
     left: 0px;
@@ -5,20 +6,26 @@
     width: 100%;
     height: 100%;
     z-index: 999;
-    background: #008065;
+    background: #008065; /* Anniversary Teal */
 }
 
 body {
-    background-color: #008065;
+    background-color: #008065; /* Anniversary Teal */
     overflow: hidden;
+    margin: 0;
+    padding: 0;
 }
 
+/* 2. Logo Size & Position Logic (Matching your Birthday layout) */
 img {
-    width: 100%;
+    width: 100%; /* Fills the col-xl-6 container exactly like the birthday banner did */
+    height: auto;
+    max-width: 250px; /* Limits size so it doesn't overwhelm the screen */
+    display: block;
+    margin: 0 auto;
 }
 
-/* Balloons Removed from CSS */
-
+/* 3. Confetti Layer */
 #confetti {
     position: absolute;
     left: 0;
@@ -27,10 +34,11 @@ img {
     width: 100%;
 }
 
+/* 4. Anniversary Title Styling (White with White Glow) */
 .birthday-title {
     font-family: 'Dubai', sans-serif;
     font-size: clamp(24px, 8vw, 45px);
-    color: #FFFFFF; /* White Text */
+    color: #FFFFFF; /* Pure White */
     letter-spacing: 2px;
     font-weight: 600;
     text-transform: uppercase;
@@ -38,17 +46,18 @@ img {
     z-index: 10;      
     text-align: center;
     width: 95%;
-    margin: 0 auto;
+    margin: 20px auto 0 auto;
     line-height: 1.2;
     animation: breathe-glow 2s ease-in-out infinite;
 }
 
+/* 5. The White Glow Animation */
 @keyframes breathe-glow {
     0% {
         text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
     }
     50% {
-        text-shadow: 0 0 15px #FFFFFF, 0 0 25px #FFFFFF; /* White Glow */
+        text-shadow: 0 0 15px #FFFFFF, 0 0 25px #FFFFFF; 
     }
     100% {
         text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
@@ -59,13 +68,7 @@ img {
     animation: breathe-glow 4s ease-in-out infinite;
 }
 
-.company-logo {
-    max-width: 200px; 
-    width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-}
+/* 6. Layout Centering */
 .main {
     display: flex;
     flex-direction: column;
@@ -74,3 +77,5 @@ img {
     min-height: 100vh;        
     width: 100%;
 }
+
+/* Removed all Balloon and Birthday specific animations to keep file clean */
