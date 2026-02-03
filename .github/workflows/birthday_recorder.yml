@@ -74,7 +74,7 @@ jobs:
           find generated_gifs/ -name "*.gif" -type f -mtime +3 -delete
           
           # Move the new GIF to the folder
-          mv birthday.gif "generated_gifs/${{ github.event.client_payload.name }}_birthday.gif"
+          mv birthday.gif "generated_gifs/${{ github.event.client_payload.name }}_anniversary.gif"
           
           git add .
           git commit -m "Generated GIF and cleaned old files for ${{ github.event.client_payload.name }}"
