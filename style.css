@@ -1,4 +1,3 @@
-/* 1. Loader & Background - Updated to Teal */
 .loader {
     position: fixed;
     left: 0px;
@@ -15,12 +14,10 @@ body {
     overflow: hidden;
 }
 
-/* 2. Global Image Reset (From Birthday code) */
 img {
     width: 100%;
 }
 
-/* 3. Confetti Layer */
 #confetti {
     position: absolute;
     left: 0;
@@ -29,11 +26,10 @@ img {
     width: 100%;
 }
 
-/* 4. Anniversary Title - White Glow Logic */
 .birthday-title {
     font-family: 'Dubai', sans-serif;
     font-size: clamp(20px, 7vw, 40px);
-    color: #FFFFFF; 
+    color: #FFFFFF;
     letter-spacing: 2px;
     font-weight: 600;
     text-transform: uppercase;
@@ -46,16 +42,15 @@ img {
     animation: breathe-glow 2s ease-in-out infinite;
 }
 
-/* 5. LOGO LOGIC - EXACTLY MATCHING BIRTHDAY BANNER SIZE */
+/* EXACT LOGIC FROM BIRTHDAY STYLE */
 .birthday-banner {
-    max-width: 350px; /* The exact constraint from your birthday code */
+    max-width: 350px;
     width: 100%;
     height: auto;
     display: block;
     margin: 0 auto;
 }
 
-/* 6. Animations - White Glow */
 @keyframes breathe-glow {
     0% {
         text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
@@ -72,7 +67,6 @@ img {
     animation: breathe-glow 4s ease-in-out infinite;
 }
 
-/* 7. Centering Logic - Identical to Birthday version */
 .main {
     display: flex;
     flex-direction: column;   
@@ -84,5 +78,4 @@ img {
 
 .main .container {
     width: 100%;
-    /* transform: translateY(-10px); */ /* Enable this if you want it slightly higher like the birthday one */
 }
