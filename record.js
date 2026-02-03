@@ -13,7 +13,7 @@ const { PuppeteerScreenRecorder } = require('puppeteer-screen-recorder');
 
   const name = process.env.EMPLOYEE_NAME || 'Team Member';
   // Points to your NEW account URL
-  const url = `https://amGHna.github.io/happy-birthday/?name=${encodeURIComponent(name)}`;
+  const url = `https://amGHna.github.io/work-anniversary/?name=${encodeURIComponent(name)}`;
   
   const recorder = new PuppeteerScreenRecorder(page);
   await page.goto(url, { waitUntil: 'networkidle0' });
