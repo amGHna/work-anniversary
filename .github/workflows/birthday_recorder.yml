@@ -1,4 +1,4 @@
-name: Record Birthday GIF
+name: Record Work Anniversary GIF
 on:
   repository_dispatch:
     types: [generate_anniversary_gif]
@@ -27,6 +27,7 @@ jobs:
       - name: Run Recording Script
         env:
           EMPLOYEE_NAME: ${{ github.event.client_payload.name }}
+          YEARS_COUNT: ${{ github.event.client_payload.years }}
         run: |
           cat << 'EOF' > record.js
           const puppeteer = require('puppeteer');
@@ -43,13 +44,15 @@ jobs:
             await page.setViewport({ width: 600, height: 400 });
 
             const name = process.env.EMPLOYEE_NAME || 'Team Member';
-            // Points to your NEW account URL
-            const url = `https://amGHna.github.io/work-anniversary/?name=${encodeURIComponent(name)}`;
+            const years = process.env.YEARS_COUNT || '';
+
+            // Points to your URL and passes BOTH name and years
+            const url = `https://amGHna.github.io/work-anniversary/?name=${encodeURIComponent(name)}&years=${encodeURIComponent(years)}`;
             
             const recorder = new PuppeteerScreenRecorder(page);
             await page.goto(url, { waitUntil: 'networkidle0' });
 
-            // Records 10 seconds of your animation
+            // Records 5 seconds of your animation
             await recorder.start('video.mp4');
             await new Promise(resolve => setTimeout(resolve, 5000)); 
             await recorder.stop();
@@ -61,21 +64,21 @@ jobs:
 
       - name: Convert MP4 to Optimized GIF
         run: |
-          ffmpeg -i video.mp4 -vf "fps=10,scale=480:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" birthday.gif
+          ffmpeg -i video.mp4 -vf "fps=10,scale=480:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" anniversary.gif
 
       - name: Clean up and Upload GIF
         run: |
-          git config --global user.name "BirthdayBot"
+          git config --global user.name "AnniversaryBot"
           git config --global user.email "bot@github.com"
           
           mkdir -p generated_gifs
           
-          # JANITOR STEP: Remove any GIFs older than 3 days to prevent repository bloat
+          # Remove any GIFs older than 3 days
           find generated_gifs/ -name "*.gif" -type f -mtime +3 -delete
           
           # Move the new GIF to the folder
-          mv birthday.gif "generated_gifs/${{ github.event.client_payload.name }}_anniversary.gif"
+          mv anniversary.gif "generated_gifs/${{ github.event.client_payload.name }}_anniversary.gif"
           
           git add .
-          git commit -m "Generated GIF and cleaned old files for ${{ github.event.client_payload.name }}"
+          git commit -m "Generated GIF for ${{ github.event.client_payload.name }} (${{ github.event.client_payload.years }} years)"
           git push
