@@ -1,11 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const name = urlParams.get('name');
+    const years = urlParams.get('years');
+
+    // Helper function to convert number to ordinal (1st, 2nd, 3rd, etc.)
+    function getOrdinal(n) {
+        let s = ["th", "st", "nd", "rd"],
+            v = n % 100;
+        return n + (s[(v - 20) % 10] || s[v] || s[0]);
+    }
+
     if (name) {
         const titleElement = document.getElementById('birthday-title');
         if (titleElement) {
-            // Updated for Anniversary and White Text
-            titleElement.innerHTML = `Happy Work Anniversary <br> <span style="font-size: 1.2em;">${decodeURIComponent(name)}</span>`;
+            let displayTitle = "Happy Work Anniversary";
+            
+            // If years logic is provided, add it to the title
+            if (years && !isNaN(years)) {
+                displayTitle = `Happy ${getOrdinal(years)} Work Anniversary`;
+            }
+
+            titleElement.innerHTML = `${displayTitle} <br> <span style="font-size: 1.2em;">${decodeURIComponent(name)}</span>`;
         }
     }
 });
@@ -22,30 +37,21 @@ $(window).load(function () {
     $(".main").fadeIn("slow");
     $(".birthday-title").addClass("pulse-active");
     sf.destroy();
-    // Balloon animation logic removed to prevent errors
 });
 
 var retina = window.devicePixelRatio,
-
-    // Math shorthands
     PI = Math.PI,
     sqrt = Math.sqrt,
     round = Math.round,
     random = Math.random,
     cos = Math.cos,
     sin = Math.sin,
-
-    // Local WindowAnimationTiming interface
     rAF = window.requestAnimationFrame,
     cAF = window.cancelAnimationFrame || window.cancelRequestAnimationFrame,
-    _now = Date.now || function () {
-        return new Date().getTime();
-    };
+    _now = Date.now || function () { return new Date().getTime(); };
 
-// Local WindowAnimationTiming interface polyfill
 (function (w) {
     var prev = _now();
-
     function fallback(fn) {
         var curr = _now();
         var ms = Math.max(0, 16 - (curr - prev));
@@ -53,18 +59,9 @@ var retina = window.devicePixelRatio,
         prev = curr;
         return req;
     }
-
-    var cancel = w.cancelAnimationFrame ||
-        w.webkitCancelAnimationFrame ||
-        w.clearTimeout;
-
-    rAF = w.requestAnimationFrame ||
-        w.webkitRequestAnimationFrame ||
-        fallback;
-
-    cAF = function (id) {
-        cancel.call(w, id);
-    };
+    var cancel = w.cancelAnimationFrame || w.webkitCancelAnimationFrame || w.clearTimeout;
+    rAF = w.requestAnimationFrame || w.webkitRequestAnimationFrame || fallback;
+    cAF = function (id) { cancel.call(w, id); };
 }(window));
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -76,8 +73,6 @@ document.addEventListener("DOMContentLoaded", function () {
         ribbonPaperThick = 8.0,
         confettiPaperCount = 15,
         DEG_TO_RAD = PI / 180,
-        RAD_TO_DEG = 180 / PI,
-        // SILVER AND WHITE PALETTE FOR ANNIVERSARY
         colors = [
             ["#C0C0C0", "#808080"], // Silver and Grey
             ["#DCDCDC", "#A9A9A9"], // Gainsboro and Dark Grey
@@ -87,34 +82,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function Vector2(_x, _y) {
         this.x = _x, this.y = _y;
-        this.Length = function () {
-            return sqrt(this.SqrLength());
-        }
-        this.SqrLength = function () {
-            return this.x * this.x + this.y * this.y;
-        }
-        this.Add = function (_vec) {
-            this.x += _vec.x;
-            this.y += _vec.y;
-        }
-        this.Sub = function (_vec) {
-            this.x -= _vec.x;
-            this.y -= _vec.y;
-        }
-        this.Div = function (_f) {
-            this.x /= _f;
-            this.y /= _f;
-        }
-        this.Mul = function (_f) {
-            this.x *= _f;
-            this.y *= _f;
-        }
+        this.Length = function () { return sqrt(this.SqrLength()); }
+        this.SqrLength = function () { return this.x * this.x + this.y * this.y; }
+        this.Add = function (_vec) { this.x += _vec.x; this.y += _vec.y; }
+        this.Sub = function (_vec) { this.x -= _vec.x; this.y -= _vec.y; }
+        this.Div = function (_f) { this.x /= _f; this.y /= _f; }
+        this.Mul = function (_f) { this.x *= _f; this.y *= _f; }
         this.Normalize = function () {
             var sqrLen = this.SqrLength();
             if (sqrLen != 0) {
                 var factor = 1.0 / sqrt(sqrLen);
-                this.x *= factor;
-                this.y *= factor;
+                this.x *= factor; this.y *= factor;
             }
         }
         this.Normalized = function () {
@@ -126,33 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return new Vector2(0, 0);
         }
     }
-    Vector2.Lerp = function (_vec0, _vec1, _t) {
-        return new Vector2((_vec1.x - _vec0.x) * _t + _vec0.x, (_vec1.y - _vec0.y) * _t + _vec0.y);
-    }
-    Vector2.Distance = function (_vec0, _vec1) {
-        return sqrt(Vector2.SqrDistance(_vec0, _vec1));
-    }
-    Vector2.SqrDistance = function (_vec0, _vec1) {
-        var x = _vec0.x - _vec1.x;
-        var y = _vec0.y - _vec1.y;
-        return (x * x + y * y);
-    }
-    Vector2.Scale = function (_vec0, _vec1) {
-        return new Vector2(_vec0.x * _vec1.x, _vec0.y * _vec1.y);
-    }
-    Vector2.Min = function (_vec0, _vec1) {
-        return new Vector2(Math.min(_vec0.x, _vec1.x), Math.min(_vec0.y, _vec1.y));
-    }
-    Vector2.Max = function (_vec0, _vec1) {
-        return new Vector2(Math.max(_vec0.x, _vec1.x), Math.max(_vec0.y, _vec1.y));
-    }
-    Vector2.ClampMagnitude = function (_vec0, _len) {
-        var vecNorm = _vec0.Normalized;
-        return new Vector2(vecNorm.x * _len, vecNorm.y * _len);
-    }
-    Vector2.Sub = function (_vec0, _vec1) {
-        return new Vector2(_vec0.x - _vec1.x, _vec0.y - _vec1.y);
-    }
+    Vector2.Sub = function (_vec0, _vec1) { return new Vector2(_vec0.x - _vec1.x, _vec0.y - _vec1.y); }
 
     function EulerMass(_x, _y, _mass, _drag) {
         this.position = new Vector2(_x, _y);
@@ -160,9 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
         this.drag = _drag;
         this.force = new Vector2(0, 0);
         this.velocity = new Vector2(0, 0);
-        this.AddForce = function (_f) {
-            this.force.Add(_f);
-        }
+        this.AddForce = function (_f) { this.force.Add(_f); }
         this.Integrate = function (_dt) {
             var acc = this.CurrentForce(this.position);
             acc.Div(this.mass);
@@ -215,11 +165,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
         this.Draw = function (_g) {
-            if (this.cosA > 0) {
-                _g.fillStyle = this.frontColor;
-            } else {
-                _g.fillStyle = this.backColor;
-            }
+            _g.fillStyle = this.cosA > 0 ? this.frontColor : this.backColor;
             _g.beginPath();
             _g.moveTo((this.pos.x + this.corners[0].x * this.size) * retina, (this.pos.y + this.corners[0].y * this.size * this.cosA) * retina);
             for (var i = 1; i < 4; i++) {
@@ -253,7 +199,6 @@ document.addEventListener("DOMContentLoaded", function () {
             this.particles[i] = new EulerMass(_x, _y - i * this.particleDist, this.particleMass, this.particleDrag);
         }
         this.Update = function (_dt) {
-            var i = 0;
             this.time += _dt * this.oscillationSpeed;
             this.position.y += this.ySpeed * _dt;
             this.position.x += cos(this.time) * this.oscillationDistance * _dt;
@@ -262,16 +207,14 @@ document.addEventListener("DOMContentLoaded", function () {
             var dY = this.prevPosition.y - this.position.y;
             var delta = sqrt(dX * dX + dY * dY);
             this.prevPosition = new Vector2(this.position.x, this.position.y);
-            for (i = 1; i < this.particleCount; i++) {
+            for (let i = 1; i < this.particleCount; i++) {
                 var dirP = Vector2.Sub(this.particles[i - 1].position, this.particles[i].position);
                 dirP.Normalize();
                 dirP.Mul((delta / _dt) * this.velocityInherit);
                 this.particles[i].AddForce(dirP);
             }
-            for (i = 1; i < this.particleCount; i++) {
-                this.particles[i].Integrate(_dt);
-            }
-            for (i = 1; i < this.particleCount; i++) {
+            for (let i = 1; i < this.particleCount; i++) this.particles[i].Integrate(_dt);
+            for (let i = 1; i < this.particleCount; i++) {
                 var rp2 = new Vector2(this.particles[i].position.x, this.particles[i].position.y);
                 rp2.Sub(this.particles[i - 1].position);
                 rp2.Normalize();
@@ -279,9 +222,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 rp2.Add(this.particles[i - 1].position);
                 this.particles[i].position = rp2;
             }
-            if (this.position.y > ConfettiRibbon.bounds.y + this.particleDist * this.particleCount) {
-                this.Reset();
-            }
+            if (this.position.y > ConfettiRibbon.bounds.y + this.particleDist * this.particleCount) this.Reset();
         }
         this.Reset = function () {
             this.position.y = -random() * ConfettiRibbon.bounds.y;
@@ -305,115 +246,55 @@ document.addEventListener("DOMContentLoaded", function () {
                 var p0 = new Vector2(this.particles[i].position.x + this.xOff, this.particles[i].position.y + this.yOff);
                 var p1 = new Vector2(this.particles[i + 1].position.x + this.xOff, this.particles[i + 1].position.y + this.yOff);
                 if (this.Side(this.particles[i].position.x, this.particles[i].position.y, this.particles[i + 1].position.x, this.particles[i + 1].position.y, p1.x, p1.y) < 0) {
-                    _g.fillStyle = this.frontColor;
-                    _g.strokeStyle = this.frontColor;
+                    _g.fillStyle = this.frontColor; _g.strokeStyle = this.frontColor;
                 } else {
-                    _g.fillStyle = this.backColor;
-                    _g.strokeStyle = this.backColor;
+                    _g.fillStyle = this.backColor; _g.strokeStyle = this.backColor;
                 }
-                if (i == 0) {
-                    _g.beginPath();
-                    _g.moveTo(this.particles[i].position.x * retina, this.particles[i].position.y * retina);
-                    _g.lineTo(this.particles[i + 1].position.x * retina, this.particles[i + 1].position.y * retina);
-                    _g.lineTo(((this.particles[i + 1].position.x + p1.x) * 0.5) * retina, ((this.particles[i + 1].position.y + p1.y) * 0.5) * retina);
-                    _g.closePath();
-                    _g.stroke();
-                    _g.fill();
-                    _g.beginPath();
-                    _g.moveTo(p1.x * retina, p1.y * retina);
-                    _g.lineTo(p0.x * retina, p0.y * retina);
-                    _g.lineTo(((this.particles[i + 1].position.x + p1.x) * 0.5) * retina, ((this.particles[i + 1].position.y + p1.y) * 0.5) * retina);
-                    _g.closePath();
-                    _g.stroke();
-                    _g.fill();
-                } else if (i == this.particleCount - 2) {
-                    _g.beginPath();
-                    _g.moveTo(this.particles[i].position.x * retina, this.particles[i].position.y * retina);
-                    _g.lineTo(this.particles[i + 1].position.x * retina, this.particles[i + 1].position.y * retina);
-                    _g.lineTo(((this.particles[i].position.x + p0.x) * 0.5) * retina, ((this.particles[i].position.y + p0.y) * 0.5) * retina);
-                    _g.closePath();
-                    _g.stroke();
-                    _g.fill();
-                    _g.beginPath();
-                    _g.moveTo(p1.x * retina, p1.y * retina);
-                    _g.lineTo(p0.x * retina, p0.y * retina);
-                    _g.lineTo(((this.particles[i].position.x + p0.x) * 0.5) * retina, ((this.particles[i].position.y + p0.y) * 0.5) * retina);
-                    _g.closePath();
-                    _g.stroke();
-                    _g.fill();
-                } else {
-                    _g.beginPath();
-                    _g.moveTo(this.particles[i].position.x * retina, this.particles[i].position.y * retina);
-                    _g.lineTo(this.particles[i + 1].position.x * retina, this.particles[i + 1].position.y * retina);
-                    _g.lineTo(p1.x * retina, p1.y * retina);
-                    _g.lineTo(p0.x * retina, p0.y * retina);
-                    _g.closePath();
-                    _g.stroke();
-                    _g.fill();
-                }
+                _g.beginPath();
+                _g.moveTo(this.particles[i].position.x * retina, this.particles[i].position.y * retina);
+                _g.lineTo(this.particles[i + 1].position.x * retina, this.particles[i + 1].position.y * retina);
+                _g.lineTo(p1.x * retina, p1.y * retina);
+                _g.lineTo(p0.x * retina, p0.y * retina);
+                _g.closePath();
+                _g.stroke();
+                _g.fill();
             }
         }
-        this.Side = function (x1, y1, x2, y2, x3, y3) {
-            return ((x1 - x2) * (y3 - y2) - (y1 - y2) * (x3 - x2));
-        }
+        this.Side = function (x1, y1, x2, y2, x3, y3) { return ((x1 - x2) * (y3 - y2) - (y1 - y2) * (x3 - x2)); }
     }
     ConfettiRibbon.bounds = new Vector2(0, 0);
-    confetti = {};
-    confetti.Context = function (id) {
-        var i = 0;
+    
+    var confettiObj = new (function Context(id) {
         var canvas = document.getElementById(id);
         var canvasParent = canvas.parentNode;
-        var canvasWidth = canvasParent.offsetWidth;
-        var canvasHeight = canvasParent.offsetHeight;
-        canvas.width = canvasWidth * retina;
-        canvas.height = canvasHeight * retina;
         var context = canvas.getContext('2d');
-        var interval = null;
         var confettiRibbons = new Array();
-        ConfettiRibbon.bounds = new Vector2(canvasWidth, canvasHeight);
-        for (i = 0; i < confettiRibbonCount; i++) {
-            confettiRibbons[i] = new ConfettiRibbon(random() * canvasWidth, -random() * canvasHeight * 2, ribbonPaperCount, ribbonPaperDist, ribbonPaperThick, 45, 1, 0.05);
-        }
         var confettiPapers = new Array();
-        ConfettiPaper.bounds = new Vector2(canvasWidth, canvasHeight);
-        for (i = 0; i < confettiPaperCount; i++) {
-            confettiPapers[i] = new ConfettiPaper(random() * canvasWidth, random() * canvasHeight);
-        }
+
         this.resize = function () {
-            canvasWidth = canvasParent.offsetWidth;
-            canvasHeight = canvasParent.offsetHeight;
-            canvas.width = canvasWidth * retina;
-            canvas.height = canvasHeight * retina;
-            ConfettiPaper.bounds = new Vector2(canvasWidth, canvasHeight);
-            ConfettiRibbon.bounds = new Vector2(canvasWidth, canvasHeight);
+            canvas.width = canvasParent.offsetWidth * retina;
+            canvas.height = canvasParent.offsetHeight * retina;
+            ConfettiPaper.bounds = new Vector2(canvasParent.offsetWidth, canvasParent.offsetHeight);
+            ConfettiRibbon.bounds = new Vector2(canvasParent.offsetWidth, canvasParent.offsetHeight);
         }
         this.start = function () {
-            this.stop()
-            var context = this;
+            this.resize();
+            for (let i = 0; i < confettiRibbonCount; i++) {
+                confettiRibbons[i] = new ConfettiRibbon(random() * canvasParent.offsetWidth, -random() * canvasParent.offsetHeight * 2, ribbonPaperCount, ribbonPaperDist, ribbonPaperThick, 45, 1, 0.05);
+            }
+            for (let i = 0; i < confettiPaperCount; i++) {
+                confettiPapers[i] = new ConfettiPaper(random() * canvasParent.offsetWidth, random() * canvasParent.offsetHeight);
+            }
             this.update();
         }
-        this.stop = function () {
-            cAF(this.interval);
-        }
         this.update = function () {
-            var i = 0;
             context.clearRect(0, 0, canvas.width, canvas.height);
-            for (i = 0; i < confettiPaperCount; i++) {
-                confettiPapers[i].Update(duration);
-                confettiPapers[i].Draw(context);
-            }
-            for (i = 0; i < confettiRibbonCount; i++) {
-                confettiRibbons[i].Update(duration);
-                confettiRibbons[i].Draw(context);
-            }
-            this.interval = rAF(function () {
-                confetti.update();
-            });
+            for (let i = 0; i < confettiPaperCount; i++) { confettiPapers[i].Update(duration); confettiPapers[i].Draw(context); }
+            for (let i = 0; i < confettiRibbonCount; i++) { confettiRibbons[i].Update(duration); confettiRibbons[i].Draw(context); }
+            rAF(() => this.update());
         }
-    };
-    var confetti = new confetti.Context('confetti');
-    confetti.start();
-    window.addEventListener('resize', function (event) {
-        confetti.resize();
-    });
+    })('confetti');
+
+    confettiObj.start();
+    window.addEventListener('resize', () => confettiObj.resize());
 });
