@@ -12,13 +12,15 @@ const { PuppeteerScreenRecorder } = require('puppeteer-screen-recorder');
   await page.setViewport({ width: 600, height: 400 });
 
   const name = process.env.EMPLOYEE_NAME || 'Team Member';
-  // Points to your NEW account URL
-  const url = `https://amGHna.github.io/work-anniversary/?name=${encodeURIComponent(name)}`;
+  const years = process.env.YEARS_COUNT || '';
+
+  // Points to your URL and passes BOTH name and years
+  const url = `https://amGHna.github.io/work-anniversary/?name=${encodeURIComponent(name)}&years=${encodeURIComponent(years)}`;
   
   const recorder = new PuppeteerScreenRecorder(page);
   await page.goto(url, { waitUntil: 'networkidle0' });
 
-  // Records 10 seconds of your animation
+  // Records 5 seconds of your animation
   await recorder.start('video.mp4');
   await new Promise(resolve => setTimeout(resolve, 5000)); 
   await recorder.stop();
