@@ -67,7 +67,7 @@ var retina = window.devicePixelRatio,
 document.addEventListener("DOMContentLoaded", function () {
     var speed = 60,
         duration = (1.0 / speed),
-        confettiRibbonCount = 20,
+        confettiRibbonCount = 10,
         ribbonPaperCount = 15,
         ribbonPaperDist = 8.0,
         ribbonPaperThick = 8.0,
